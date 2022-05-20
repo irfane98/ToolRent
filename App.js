@@ -6,7 +6,7 @@ import Tabs from './navigation/tabs'
 
 import { View, Text } from 'react-native'
 
-import { Home,Rental } from './screens'
+import { Home,Rental,Location } from './screens'
 
 const Stack = createStackNavigator()
 
@@ -21,6 +21,7 @@ export default function App() {
      >
        <Stack.Screen name='Home' component={Tabs}/>
        <Stack.Screen name='Rental' component={Rental}/>
+       <Stack.Screen name='Location' component={Rental}/>
 
      </Stack.Navigator>
    </NavigationContainer>

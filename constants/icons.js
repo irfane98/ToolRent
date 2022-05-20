@@ -7,6 +7,9 @@ export const painting = require ("../assets/icons/painting.png");
 export const plumbing = require ("../assets/icons/plumbing.png");
 export const search = require ("../assets/icons/search.png");
 export const location = require ("../assets/icons/location.png");
+export const user = require("../assets/icons/user.png")
+export const menu = require("../assets/icons/menu.png")
+export const home = require("../assets/icons/home.png")
 
 export default {
     avatar,
@@ -17,5 +20,8 @@ export default {
     painting,
     plumbing,
     search,
-    location
+    location,
+    user,
+    menu,
+    home
 }
