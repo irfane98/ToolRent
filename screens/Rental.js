@@ -1,7 +1,7 @@
+import { View, Text,SafeAreaView,StyleSheet,TouchableOpacity,Image,FlatList,Animated} from 'react-native'
 import React from 'react'
-import { 
-    View,
-    Text } from 'react-native'
+
+import {icons,images,SIZES,COLORS,FONTS} from '../constants'
 
 export default function Rental() {
   return (
