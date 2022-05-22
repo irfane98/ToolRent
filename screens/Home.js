@@ -4,7 +4,7 @@ import React , {useState} from 'react'
 import {icons,images,SIZES,COLORS,FONTS} from '../constants'
 export default function Home() {
 
-  // date categories 
+  // data categories 
   const categoryData = [
     {
         id: 1,
@@ -33,6 +33,8 @@ export default function Home() {
     },
    
 ]
+//data tools
+
 
 
 
@@ -72,9 +74,64 @@ const [selectedCategory, setSelectedCategory] = useState(null)
 
     
   }
+  function renderCategories(){
+    const renderItem = ({item}) =>{
+      return(
+        <TouchableOpacity style={{
+          padding : SIZES.padding,
+          paddingBottom:SIZES.padding * 2,
+          backgroundColor: COLORS.lightGray,
+          borderRadius : SIZES.radius,
+          alignItems:'center',
+          justifyContent:'center',
+          marginRight : SIZES.padding,
+          ...styles.shadow
+        }}>
+          <View
+          style={{
+            width:50,
+            height:50,
+            borderRadius:25,
+            alignItems :'center',
+            justifyContent : 'center',
+            
+          }}
+          >
+            <Image 
+              source={item.icon}
+              resizeMode='contain'
+              style={{
+                width:30,
+                height:30
+              }}
+            />
+
+          </View>
+ 
+        </TouchableOpacity>
+      )
+      
+    }
+    return(
+      <View style={{padding:SIZES.padding}}>
+        <Text>Categories</Text>
+        <FlatList
+          data={categories}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={item =>`${item.id}`}
+          renderItem={renderItem}
+          contentContainerStyle={{paddingVertical:SIZES.padding * 2}}
+
+        />
+      </View>
+
+    )
+  }
   return (
     <SafeAreaView style={styles.container}>
       {renderHeader()}
+      {renderCategories()}
 
     </SafeAreaView>
   )
