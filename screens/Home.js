@@ -34,13 +34,110 @@ export default function Home() {
    
 ]
 //data tools
+const toolsData=[
+  {
+    id: 1,
+    name: "motobineuse",
+    price:"30 €/jour",
+    rating: 4.8,
+    categories: [1, 3],
+    photo: images.motobineuse,
+    duration: "30 - 45 min",
+    location: {
+        latitude: 1.5347282806345879},
+    },
+    {
+      id: 2,
+      name: "pince",
+      price:"20 €/jour",
+      rating: 4.4,
+      categories: [2, 4],
+      photo: images.pince,
+      duration: "30 - 45 min",
+      location: {
+          latitude: 1.5347282806345879},
+      },
+      {
+        id: 3,
+        name: "karcher",
+        price:"10 €/jour",
+        rating: 4.8,
+        categories: [1,5],
+        photo: images.karcher,
+        duration: "30 - 45 min",
+        location: {
+            latitude: 1.5347282806345879},
+        },
+       
+]
 
 
 
 
 const [categories, setCategories] = useState(categoryData)
 const [selectedCategory, setSelectedCategory] = useState(null)
+const [tools, settools] = useState(toolsData)
+  function onSelectCategory(category){
+    //filter les outils
+    let toolsList= toolsData.filter(a => a.categories.includes(category.id))
+    setSelectedCategory(category)
+  }
+  function renderToolsList(){
+    const renderItem =({item}) => (
+      <TouchableOpacity style={{
+        marginBottom:SIZES.padding *2 
+        //onPress=> navigate to  Tool Screen 
+      }}>
+        {/*Image*/}
 
+        <View style= {{marginBottom : SIZES.padding}}>
+          <Image 
+          source={item.photo}
+          resizeMode='cover'
+          style={{
+            width:"100%",
+            height:200,
+            borderRadius : SIZES.radius
+          }}
+
+          />
+          <View style={{
+            position:'absolute',
+            bottom : 0,
+            height:50,
+            width : SIZES.width *0.3,
+            backgroundColor:COLORS.primary,
+            borderTopRightRadius:SIZES.radius,
+            borderTopLeftRadius:SIZES.radius,
+            alignItems: 'center',
+            justifyContent: 'center',
+            ...styles.shadow
+          }}>
+            <Text style={{...FONTS.h4}}>{item.price}</Text>
+
+          </View>
+
+        </View>
+        <Text style={{...FONTS.body2}}>{item.name}</Text>
+
+
+      </TouchableOpacity>
+    )
+return(
+
+  <FlatList 
+    data={tools}
+    keyExtractor={item =>`${item.id}`}
+    renderItem={renderItem}
+    contentContainerStyle={{
+      paddingHorizontal:SIZES.padding *2,
+      paddingBottom: 30
+
+    }}
+  />
+)
+
+  }
   function renderHeader() {
     return (
 
@@ -80,13 +177,15 @@ const [selectedCategory, setSelectedCategory] = useState(null)
         <TouchableOpacity style={{
           padding : SIZES.padding,
           paddingBottom:SIZES.padding * 2,
-          backgroundColor: COLORS.lightGray,
+          backgroundColor: (selectedCategory?.id==item.id) ? COLORS.primary:  COLORS.lightGray,
           borderRadius : SIZES.radius,
           alignItems:'center',
           justifyContent:'center',
           marginRight : SIZES.padding,
           ...styles.shadow
-        }}>
+        }}
+          onPress={()=> onSelectCategory(item)}
+        >
           <View
           style={{
             width:50,
@@ -107,6 +206,9 @@ const [selectedCategory, setSelectedCategory] = useState(null)
             />
 
           </View>
+          <Text>
+            {item.name}
+          </Text>
  
         </TouchableOpacity>
       )
@@ -132,6 +234,7 @@ const [selectedCategory, setSelectedCategory] = useState(null)
     <SafeAreaView style={styles.container}>
       {renderHeader()}
       {renderCategories()}
+      {renderToolsList()}
 
     </SafeAreaView>
   )
