@@ -2,7 +2,8 @@ import { View, Text,SafeAreaView,StyleSheet,TouchableOpacity,Image,FlatList } fr
 import React , {useState} from 'react'
 
 import {icons,images,SIZES,COLORS,FONTS} from '../constants'
-export default function Home() {
+
+export default function Home({navigation}) {
 
   // data categories 
   const categoryData = [
@@ -77,17 +78,26 @@ const toolsData=[
 const [categories, setCategories] = useState(categoryData)
 const [selectedCategory, setSelectedCategory] = useState(null)
 const [tools, settools] = useState(toolsData)
+//const [currentLocation, setCurrentLocation] = useState(initialCurrentLocation)
   function onSelectCategory(category){
     //filter les outils
     let toolsList= toolsData.filter(a => a.categories.includes(category.id))
     setSelectedCategory(category)
   }
+  function getCategoryNameById(id){
+    let category= categories.filter(a => a.id == id)
+    if(category.length>0)
+      return category[0].name
+    return ""
+
+  }
   function renderToolsList(){
     const renderItem =({item}) => (
       <TouchableOpacity style={{
-        marginBottom:SIZES.padding *2 
-        //onPress=> navigate to  Tool Screen 
-      }}>
+        marginBottom:SIZES.padding *2 }}
+        onPress={()=>navigation.navigate("Rental", {item}
+        )}
+      >
         {/*Image*/}
 
         <View style= {{marginBottom : SIZES.padding}}>
@@ -209,6 +219,28 @@ return(
           <Text>
             {item.name}
           </Text>
+            {/*categories*/}
+          <View style={{
+            flexDirection:'row',
+            marginLeft:10
+          }}>
+            {/*
+              item.map.categories((categoryId)=>{
+                return(
+                  <View
+                  style={{flexDirection:'row'}}
+                  key={categoryId}>
+                    <Text>
+                    {getCategoryNameById(categoryId)}
+
+                    </Text>
+                  
+                  </View>
+                )
+              })
+            */}
+
+          </View>
  
         </TouchableOpacity>
       )
