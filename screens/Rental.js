@@ -13,11 +13,7 @@ export default function Rental({route}) {
     setTool(item)
     setCurrentLocation(currentLocation)
   
-    return () => {
-      second
-    }
-  }, [third])
-  
+  })
 
   return (
     <View>
