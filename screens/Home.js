@@ -38,36 +38,43 @@ export default function Home({navigation}) {
 const toolsData=[
   {
     id: 1,
-    name: "motobineuse",
+    name: "Motobineuse",
+    description: "Motobineuse en perfect etat pour un travail qui demande bcp d'effort physique ",
     price:"30 €/jour",
     rating: 4.8,
     categories: [1, 3],
     photo: images.motobineuse,
     duration: "30 - 45 min",
     location: {
-        latitude: 1.5347282806345879},
+        latitude: 1.5347282806345879,
+        longitude: 110.35632207358996},
     },
     {
       id: 2,
-      name: "pince",
+      name: "Pince",
+      description:" Pince en bonne etat efficace pour couper et tailler les arbres ",
       price:"20 €/jour",
       rating: 4.4,
       categories: [2, 4],
       photo: images.pince,
       duration: "30 - 45 min",
       location: {
-          latitude: 1.5347282806345879},
+          latitude:  1.5238753474714375,
+          longitude: 110.34261833833622},
       },
       {
         id: 3,
-        name: "karcher",
+        name: "Karcher",
+        description:"Karcher efficace pour les nettoyages à haute pression",
         price:"10 €/jour",
         rating: 4.8,
         categories: [1,5],
         photo: images.karcher,
         duration: "30 - 45 min",
         location: {
-            latitude: 1.5347282806345879},
+            latitude: 1.5578068150528928,
+            longitude: 110.35482523764315
+          },
         },
        
 ]

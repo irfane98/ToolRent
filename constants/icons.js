@@ -10,6 +10,9 @@ export const location = require ("../assets/icons/location.png");
 export const user = require("../assets/icons/user.png")
 export const menu = require("../assets/icons/menu.png")
 export const home = require("../assets/icons/home.png")
+export const back = require("../assets/icons/back.png")
+export const pin = require("../assets/icons/pin.png")
+export const card = require("../assets/icons/credit-card.png")
 
 export default {
     avatar,
@@ -23,5 +26,8 @@ export default {
     location,
     user,
     menu,
-    home
+    home,
+    back,
+    pin,
+    card
 }
