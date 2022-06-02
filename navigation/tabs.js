@@ -102,12 +102,12 @@ export default function tabs() {
             }}
        />
        <Tab.Screen 
-            name='Location'
-            component={Location}
+            name='Rental'
+            component={Rental}
             options = {{
                 tabBarIcon:({focused})=>(
                     <Image 
-                        source={icons.location}
+                        source={icons.menu}
                         resizeMode = 'contain'
                         style = {{
                             width:25,
@@ -125,12 +125,12 @@ export default function tabs() {
             }}
        />
          <Tab.Screen 
-            name='Rental'
-            component={Rental}
+            name='Location'
+            component={Location}
             options = {{
                 tabBarIcon:({focused})=>(
                     <Image 
-                        source={icons.menu}
+                        source={icons.location}
                         resizeMode = 'contain'
                         style = {{
                             width:25,

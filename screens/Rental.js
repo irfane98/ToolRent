@@ -179,7 +179,7 @@ useEffect(() => {
               currentLocation:currentLocation
             })}
             >
-            <Text style={{color:COLORS.white,...FONTS.h2}}> Order</Text>
+            <Text style={{color:COLORS.white,...FONTS.h2}}> Suivant</Text>
 
           </TouchableOpacity>
 
