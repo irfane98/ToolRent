@@ -1,20 +1,19 @@
 import { View, Text,SafeAreaView,StyleSheet,TouchableOpacity,Image,FlatList,Animated} from 'react-native'
-import React,{useState}  from 'react'
-import { useEffect } from 'react'
+import React,{useState,useEffect}  from 'react'
 
 import {icons,images,SIZES,COLORS,FONTS} from '../constants'
 
 export default function Rental({route,navigation}) {
-  const [tool, setTool] = useState(null)
-  const [currentLocation, setCurrentLocation] = useState(null)
+  const [tool, setTool] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
 
-useEffect(() => {
+  /*useEffect(() => {
     let {item} = route.params;
 
     setTool(item)
     setCurrentLocation(currentLocation)
   
-  })
+  })*/
   function renderHeader(){
     return (
       <View style={{flexDirection:'row'}}>
@@ -179,7 +178,7 @@ useEffect(() => {
               currentLocation:currentLocation
             })}
             >
-            <Text style={{color:COLORS.white,...FONTS.h2}}> Suivant</Text>
+            <Text style={{color:COLORS.white,...FONTS.h2}}>Suivant</Text>
 
           </TouchableOpacity>
 

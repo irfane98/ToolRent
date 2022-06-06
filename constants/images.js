@@ -6,6 +6,8 @@ export const pince= require("../assets/images/pince.jpg")
 export const tarriere= require("../assets/images/tarriere.jpeg")
 export const tondeuse= require("../assets/images/tondeuseGazon.jpg")
 export const tronçonneuse= require("../assets/images/tronçonneuse.png")
+export const logo= require("../assets/images/logo.png")
+export const logo2= require("../assets/images/logo2.png")
 
 export default {
 
@@ -16,6 +18,8 @@ export default {
     pince,
     tarriere,
     tondeuse,
-    tronçonneuse
+    tronçonneuse,
+    logo,
+    logo2
 
 }
