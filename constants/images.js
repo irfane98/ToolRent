@@ -8,6 +8,11 @@ export const tondeuse= require("../assets/images/tondeuseGazon.jpg")
 export const tronçonneuse= require("../assets/images/tronçonneuse.png")
 export const logo= require("../assets/images/logo.png")
 export const logo2= require("../assets/images/logo2.png")
+export const bkg1= require("../assets/images/bkg1.png")
+export const bkg2= require("../assets/images/bkg2.png")
+export const banner1= require("../assets/images/banner1.png")
+export const banner2= require("../assets/images/banner2.png")
+export const banner3= require("../assets/images/banner3.png")
 
 export default {
 
@@ -20,6 +25,11 @@ export default {
     tondeuse,
     tronçonneuse,
     logo,
-    logo2
+    logo2,
+    bkg1,
+    bkg2,
+    banner1,
+    banner2,
+    banner3
 
 }

@@ -13,6 +13,10 @@ export const home = require("../assets/icons/home.png")
 export const back = require("../assets/icons/back.png")
 export const pin = require("../assets/icons/pin.png")
 export const card = require("../assets/icons/credit-card.png")
+export const correct = require("../assets/icons/correct.png")
+export const show = require("../assets/icons/show.png")
+export const noshow = require("../assets/icons/noshow.png")
+export const cancel = require("../assets/icons/cancel.png")
 
 export default {
     avatar,
@@ -29,5 +33,9 @@ export default {
     home,
     back,
     pin,
-    card
+    card,
+    correct,
+    show,
+    noshow,
+    cancel
 }
