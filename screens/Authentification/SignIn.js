@@ -17,6 +17,10 @@ const [password, setPassword] = React.useState("")
 const [emailError, setEmailError] = React.useState("")
 const [showPass, setShowPass] = React.useState(false)
 const [saveMe, setSaveMe] = React.useState(false)
+
+function isEnableSignIn(){
+  
+}
   return (
    <AuthLayout 
         title="Connectez vous!"
