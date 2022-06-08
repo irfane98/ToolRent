@@ -3,7 +3,7 @@ import React from 'react'
 
 import {FONTS,COLORS} from "../constants"
 
-export default function TextButton ({buttonContainerStyle,label,labelStyle,onPress}) {
+export default function TextButton ({buttonContainerStyle,disabled,label,labelStyle,onPress}) {
   return (
    <TouchableOpacity style={{
             alignItems:'center',
@@ -11,6 +11,7 @@ export default function TextButton ({buttonContainerStyle,label,labelStyle,onPre
             backgroundColor:COLORS.primary,
             ...buttonContainerStyle
    }}
+   disabled={disabled}
    onPress={onPress}
    >
        <Text style={{

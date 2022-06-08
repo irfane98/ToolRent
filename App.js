@@ -13,7 +13,11 @@ import {
   Location,
   User,
   onBoarding,
-  SignIn} from './screens'
+  SignIn,
+  SignUp,
+  Otp,
+  ForgotPassword
+} from './screens'
 
 const Stack = createStackNavigator()
 
@@ -29,6 +33,9 @@ export default function App() {
      >
        <Stack.Screen name='onBoarding' component={onBoarding}/>
        <Stack.Screen name='SignIn' component={SignIn}/>
+       <Stack.Screen name='SignUp' component={SignUp}/>
+       <Stack.Screen name='ForgotPassword' component={ForgotPassword}/>
+       <Stack.Screen name='Otp' component={Otp}/>
        <Stack.Screen name='Home' component={Tabs}/>
        <Stack.Screen name='Rental' component={Rental}/>
        <Stack.Screen name='Location' component={Location}/>

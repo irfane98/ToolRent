@@ -7,13 +7,13 @@ export default function Rental({route,navigation}) {
   const [tool, setTool] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
 
-  /*useEffect(() => {
+  React.useEffect(() => {
     let {item} = route.params;
 
     setTool(item)
     setCurrentLocation(currentLocation)
   
-  })*/
+  })
   function renderHeader(){
     return (
       <View style={{flexDirection:'row'}}>

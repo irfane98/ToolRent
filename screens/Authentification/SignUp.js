@@ -1,39 +1,42 @@
 import { View, Text,TouchableOpacity,Image } from 'react-native'
 import React from 'react'
 import {AuthLayout} from '../'
-import { FONTS,SIZES,COLORS,icons} from '../../constants'
-import { FormInput,
-         CustomSwitch,
-         TextButton,
-         TextIconButton
-} from '../../components'
-import {utils} from "../../utils";
 
+import { FONTS,COLORS,SIZES,icons } from '../../constants';
 
+import { FormInput,TextButton, TextIconButton } from '../../components';
+import { utils } from '../../utils';
 
-export default function SignIn({navigation}) {
-
+export default function SignUp({navigation}) {
 const [email, setEmail] = React.useState("")
+const [username, setUsername] = React.useState("") 
 const [password, setPassword] = React.useState("")
-const [emailError, setEmailError] = React.useState("")
 const [showPass, setShowPass] = React.useState(false)
-const [saveMe, setSaveMe] = React.useState(false)
+const [emailError, setEmailError] = React.useState("")
+const [usernameError, setUsernameError] = React.useState("")
+const [passwordError, setPasswordError] = React.useState("")
 
-function isEnableSignIn(){
-  return email !="" && password !="" && emailError==""
-  
+
+
+function isEnableSignUp(){
+  return email!="" &&username!="" && password !="" && emailError =="" && passwordError =="" && usernameError==""
 }
-  return (
-   <AuthLayout 
-        title="Connectez vous!"
-        subtitle="Content de vous revoir 🙃"
-   >
-     <View style={{
-          flex:1,
-          marginTop:24
-     }}>
-       {/* Form Input */}
-       <FormInput 
+
+ return (
+    <AuthLayout
+    title="Inscription 🙂 "
+    subtitle=" Veuillez vous enregistrer ! "
+    
+    >
+      {/*Form input & signup */}
+      <View
+      style={{
+        flex:1,
+        marginTop:24
+      }}
+      >
+
+        <FormInput 
             label="Email"
             keyboardType='email-adress'
             autoCompleteType='email'
@@ -44,7 +47,7 @@ function isEnableSignIn(){
             }}
             errorMsg={emailError}
             appendComponent={
-              <View style={{
+          <View style={{
                   justifyContent:'center'
               }}>
                 <Image 
@@ -56,21 +59,49 @@ function isEnableSignIn(){
                   
                 }}
                 
-                />
-
-
+            />
               </View>
             }
 
        />
        <FormInput 
+                  label="Nom d'utilisateur"
+                  containerStyle={{
+                    marginTop:SIZES.radius
+                  }}
+                  onChange={(value) =>{
+                    setUsername(value)
+                  }}
+                  errorMsg={usernameError}
+                  appendComponent={
+                      <View style={{
+                        justifyContent:'center'
+                      }}
+                      >
+                        <Image
+                            source={username =="" ||(username != "" && usernameError=="") ? icons.correct :icons.cancel}
+                            style={{
+                              height:20,
+                              width:20,
+                              tintColor: username==""? COLORS.gray :(username !="" && usernameError=="") ? "green": "red"
+                            }}
+                        />
+
+                      </View>
+                  }
+
+                />
+                <FormInput 
             label="Mot de passe"
             secureTextEntry={!showPass}
             autoCompleteType="password"
             containerStyle={{
               marginTop:SIZES.radius
             }}
-            onChange={(value)=> setPassword(value)}
+            onChange={(value)=> {
+              utils.validatePassword(value , setPasswordError)
+              setPassword(value)}}
+            errorMsg={passwordError}
             appendComponent={
               <TouchableOpacity style={{
                 width:40,
@@ -92,79 +123,41 @@ function isEnableSignIn(){
               </TouchableOpacity>
             }
        />
-
-       {/* save me & pwd forget */}
-       <View style={{
-         flexDirection:"row",
-         marginTop:SIZES.radius,
-         justifyContent:"space-between"
-       }}>
-          <CustomSwitch 
-              value={saveMe}
-              onChange={(value)=>setSaveMe(value)}
-          />
-          <TextButton
-            label="Mot de passe oublié?"
+       {/*SignUp & signIn */}
+       <TextButton 
+       label="S'inscrire"
+       disabled={isEnableSignUp() ? false : true }
+       buttonContainerStyle={{
+         height:55,
+         alignItems:'center',
+         marginTop :24,
+         borderRadius:SIZES.radius,
+         backgroundColor:isEnableSignUp()? COLORS.primary :COLORS.lightGray3
+       }}
+       onPress={()=> navigation.navigate("Otp")}
+       />
+       <View  style={{
+            flexDirection:'row',
+            marginTop:SIZES.radius,
+            justifyContent:'center'
+       }}
+       >
+         <Text style={{color:COLORS.darkgray,...FONTS.body4}}> Déjà un compte ?</Text>
+         <TextButton
+            label="Se connecter"
             buttonContainerStyle={{
-              backgroundColor:null
+              backgroundColor : null
             }}
             labelStyle={{
-              color:COLORS.gray,
-              ...FONTS.body4
+              marginLeft:4,
+              color:COLORS.primary,
+              ...FONTS.h4
             }}
-            onPress={()=>navigation.navigate("ForgotPassword")}
-          />
-
+            onPress={()=>navigation.goBack()}
+         /> 
        </View>
-
-       {/* sign in */}
-        <TextButton 
-        label="Se Connecter"
-        disabled={isEnableSignIn()?false :true}
-        buttonContainerStyle={{
-          height:55,
-          alignItems:'center',
-          marginTop:24,
-          borderRadius: SIZES.radius,
-          backgroundColor: isEnableSignIn() ? COLORS.primary : COLORS.lightGray3
-
-          
-          
-        }}
-        onPress={()=>navigation.navigate("ForgotPassword")}
-
-        />
-
-       {/* sign up */}
-       <View style={{
-         flexDirection:'row',
-         marginTop:SIZES.radius,
-         justifyContent:'center'
-       }}>
-         <Text style={{
-           color:COLORS.darkgray,
-           ...FONTS.body4
-         }}>
-            Pas encore de compte?
-         </Text>
-         <TextButton
-              label="S'inscrire"
-              buttonContainerStyle={{
-                marginLeft:4,
-                backgroundColor:null
-              }}
-              labelStyle={{
-                color:COLORS.primary,
-                ...FONTS.h4
-              }}
-              onPress={()=>navigation.navigate("SignUp")}
-         />
-
-       </View>
-
-     </View>
-     {/* footer */}
-     <View>
+      </View>
+      <View>
        {/* facebook */}
        <TextIconButton
           containerStyle={{
@@ -207,8 +200,7 @@ function isEnableSignIn(){
           onPress={()=> console.log("Google")}
        />
      </View>
-     
 
-   </AuthLayout>
+    </AuthLayout>
   )
 }

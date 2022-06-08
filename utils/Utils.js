@@ -17,7 +17,7 @@ function validateEmail(value, setEmailError) {
 
 function validatePassword(value, setPasswordError) {
     if (value.length < 8) {
-        setPasswordError("Le mot de passe doit comporter 8 caractères")
+        setPasswordError("8 caractères requis")
     } else {
         setPasswordError("")
     }

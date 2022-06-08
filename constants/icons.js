@@ -17,6 +17,9 @@ export const correct = require("../assets/icons/correct.png")
 export const show = require("../assets/icons/show.png")
 export const noshow = require("../assets/icons/noshow.png")
 export const cancel = require("../assets/icons/cancel.png")
+export const facebook = require("../assets/icons/facebook.png")
+export const google = require("../assets/icons/google.png")
+
 
 export default {
     avatar,
@@ -37,5 +40,7 @@ export default {
     correct,
     show,
     noshow,
-    cancel
+    cancel,
+    facebook,
+    google
 }

@@ -5,6 +5,9 @@ import User from "./User";
 import onBoarding from "./onBoarding";
 import AuthLayout from "./Authentification/AuthLayout"
 import SignIn from "./Authentification/SignIn";
+import SignUp from "./Authentification/SignUp";
+import Otp from "./Authentification/Otp";
+import ForgotPassword from "./Authentification/Otp";
 export{
     Home,
     Rental,
@@ -12,7 +15,10 @@ export{
     User,
     onBoarding,
     AuthLayout,
-    SignIn
+    SignIn,
+    SignUp,
+    Otp,
+    ForgotPassword
     
 
 }
