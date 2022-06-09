@@ -131,7 +131,7 @@ function isEnableSignIn(){
           
           
         }}
-        onPress={()=>navigation.navigate("ForgotPassword")}
+        onPress={()=>navigation.navigate("Home")}
 
         />
 
