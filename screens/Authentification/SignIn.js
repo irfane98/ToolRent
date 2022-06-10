@@ -131,7 +131,7 @@ function isEnableSignIn(){
           
           
         }}
-        onPress={()=>navigation.navigate("Home")}
+        onPress={()=>navigation.navigate("Otp")}
 
         />
 

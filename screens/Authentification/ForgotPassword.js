@@ -21,7 +21,7 @@ export default function ForgotPassword({navigation}) {
         title="Recuperez votre mot de passe !"
         subtitle="Entrez votre adresse e-mail pour recuperez votre mot de passe "
         titleContainerStyle={{
-          marginTop:48
+          marginTop:24,
         }}
     >
       {/* form input */}
@@ -68,7 +68,7 @@ export default function ForgotPassword({navigation}) {
         alignItems:'center',
         marginTop:24,
         borderRadius:SIZES.radius,
-        backgroundColor : isEnableSendEmail() ? COLORS.primary : COLORS.lightGray2
+        backgroundColor : isEnableSendEmail() ? COLORS.primary : COLORS.lightGray3
 
 
       }}
