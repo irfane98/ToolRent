@@ -12,6 +12,7 @@ import {
   Rental,
   Location,
   User,
+  editUser,
   onBoarding,
   SignIn,
   SignUp,
@@ -29,7 +30,7 @@ export default function App() {
         screenOptions={{
           headerShown :false
         }}
-        initialRouteName={'onBoarding'}
+        initialRouteName={'Home'}
      >
        <Stack.Screen name='onBoarding' component={onBoarding}/>
        <Stack.Screen name='SignIn' component={SignIn}/>
@@ -40,6 +41,7 @@ export default function App() {
        <Stack.Screen name='Rental' component={Rental}/>
        <Stack.Screen name='Location' component={Location}/>
        <Stack.Screen name='User' component={User}/>
+       <Stack.Screen name='editUser' component={editUser}/>
 
      </Stack.Navigator>
    </NavigationContainer>

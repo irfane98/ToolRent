@@ -19,6 +19,15 @@ export const noshow = require("../assets/icons/noshow.png")
 export const cancel = require("../assets/icons/cancel.png")
 export const facebook = require("../assets/icons/facebook.png")
 export const google = require("../assets/icons/google.png")
+export const tel = require("../assets/icons/tel.png")
+export const mail = require("../assets/icons/mail.png")
+export const like = require("../assets/icons/like.png")
+export const share = require("../assets/icons/share.png")
+export const settings = require("../assets/icons/settings.png")
+export const editProfile = require("../assets/icons/editProfile.png")
+export const camera = require("../assets/icons/camera.png")
+
+
 
 
 export default {
@@ -42,5 +51,12 @@ export default {
     noshow,
     cancel,
     facebook,
-    google
+    google,
+    tel,
+    mail,
+    like,
+    share,
+    settings,
+    editProfile,
+    camera
 }

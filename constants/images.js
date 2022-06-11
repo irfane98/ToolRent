@@ -13,6 +13,7 @@ export const bkg2= require("../assets/images/bkg2.png")
 export const banner1= require("../assets/images/banner1.png")
 export const banner2= require("../assets/images/banner2.png")
 export const banner3= require("../assets/images/banner3.png")
+export const avatar= require("../assets/images/avatar.webp")
 
 export default {
 
@@ -30,6 +31,7 @@ export default {
     bkg2,
     banner1,
     banner2,
-    banner3
+    banner3,
+    avatar,
 
 }

@@ -2,12 +2,14 @@ import Home from "./Home";
 import Rental from "./Rental";
 import Location from "./Location";
 import User from "./User";
+import editUser from "./editUser";
 import onBoarding from "./onBoarding";
 import AuthLayout from "./Authentification/AuthLayout"
 import SignIn from "./Authentification/SignIn";
 import SignUp from "./Authentification/SignUp";
 import Otp from "./Authentification/Otp";
 import ForgotPassword from "./Authentification/ForgotPassword";
+
 export{
     Home,
     Rental,
@@ -18,5 +20,6 @@ export{
     SignIn,
     SignUp,
     Otp,
-    ForgotPassword
+    ForgotPassword,
+    editUser
 }
