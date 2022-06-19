@@ -42,7 +42,7 @@ const toolsData=[
     description: "Motobineuse en perfect etat pour un travail qui demande bcp d'effort physique ",
     price:"30 €/jour",
     rating: 4.8,
-    categories: [1, 3],
+    categories: [1,3],
     photo: images.motobineuse,
     duration: "30 - 45 min",
     location: {

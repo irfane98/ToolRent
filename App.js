@@ -30,7 +30,7 @@ export default function App() {
         screenOptions={{
           headerShown :false
         }}
-        initialRouteName={'onBoarding'}
+        initialRouteName={'Home'}
      >
        <Stack.Screen name='onBoarding' component={onBoarding}/>
        <Stack.Screen name='SignIn' component={SignIn}/>

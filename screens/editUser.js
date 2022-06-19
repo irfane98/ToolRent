@@ -2,9 +2,43 @@ import { View, Text,TouchableOpacity,TextInput,StyleSheet,ImageBackground,Image 
 import React from 'react'
 import {icons,images,SIZES,COLORS,FONTS} from '../constants'
 
+//import BottomSheet from 'reanimated-bottom-sheet';
+//import Animated from 'react-native-reanimated'
+
+
 export default function editUser({navigation}) {
+
+  function renderInner(){
+  return(
+    <Text>yoyooo</Text>
+
+  )
+  }
+  function renderHeader(){
+    return(
+      <View style={styles.header}>
+        <View style={styles.panelHandle}>
+
+        </View>
+
+      </View>
+      
+    )
+    }
+
+//const bs=React.useRef(null); 
+//const fall= null;
   return (
     <View style={styles.container}>
+    {/*  <BottomSheet
+       ref={bs}
+       snapPoints={[330,0]}
+        renderContent={renderInner}
+        renderHeader={renderHeader}
+        initialSnap={1}
+        callbackNode={fall}
+        enabledGestureInteraction={true}
+  />*/}
      <View style={{margin:20,marginTop:5}}>
      <TouchableOpacity style={{
           width:50,
@@ -63,9 +97,89 @@ export default function editUser({navigation}) {
                  </View>
 
              </TouchableOpacity>
+             <Text style={{marginTop:10,fontSize:18,fontWeight:'bold'}}> Irfane MAMAN</Text>
 
          </View>
+         <View style={styles.action}>
+         <Image 
+            source={icons.user}
+            resizeMode = 'contain'
+                style={{
+                  width : 20,
+                  height : 20,
+                  tintColor:COLORS.secondary  
+                }}/>
+          <TextInput
+          placeholder='Prénom'
+          placeholderTextColor="#666666"
 
+          autoCorrect={false}
+          style={styles.textInput}
+          />
+
+         </View>
+         <View style={styles.action}>
+         <Image 
+            source={icons.user}
+            resizeMode = 'contain'
+                style={{
+                  width : 20,
+                  height : 20,
+                  tintColor:COLORS.secondary  
+                }}/>
+          <TextInput
+          placeholder='Nom'
+          placeholderTextColor="#666666"
+
+          autoCorrect={false}
+          style={styles.textInput}
+          />
+
+         </View>
+         <View style={styles.action}>
+         <Image 
+            source={icons.mail}
+            resizeMode = 'contain'
+                style={{
+                  width : 20,
+                  height : 20,
+                  tintColor:COLORS.secondary  
+                }}/>
+          <TextInput
+          placeholder='email'
+          keyboardType='email-address'
+          placeholderTextColor="#666666"
+
+          autoCorrect={false}
+          style={styles.textInput}
+          />
+
+         </View>
+         <View style={styles.action}>
+         <Image 
+            source={icons.tel}
+            resizeMode = 'contain'
+                style={{
+                  width : 20,
+                  height : 20,
+                  tintColor:COLORS.secondary  
+                }}/>
+          <TextInput
+          placeholder='Télephone'
+          keyboardType='number-pad'
+          placeholderTextColor="#666666"
+
+          autoCorrect={false}
+          style={styles.textInput}
+          />
+
+         </View>
+         <TouchableOpacity 
+         onPress={()=>{}}
+         style={styles.commandButton}
+         >
+          <Text style={styles.panelButtonTitle}>Enregistrer</Text>
+         </TouchableOpacity>
      </View>
     </View>
   )
@@ -79,7 +193,7 @@ const styles = StyleSheet.create({
     commandButton: {
       padding: 15,
       borderRadius: 10,
-      backgroundColor: '#FF6347',
+      backgroundColor: COLORS.primary,
       alignItems: 'center',
       marginTop: 10,
     },
@@ -157,5 +271,7 @@ const styles = StyleSheet.create({
       marginTop: Platform.OS === 'ios' ? 0 : -12,
       paddingLeft: 10,
       color: '#05375a',
+      backgroundColor:COLORS.lightGray2
     },
+    
   });
