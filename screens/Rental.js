@@ -8,7 +8,7 @@ export default function Rental({route,navigation}) {
   const [currentLocation, setCurrentLocation] = useState(null);
 
   React.useEffect(() => {
-    let {item} = route.params;
+    let {item} = route.params
 
     setTool(item)
     setCurrentLocation(currentLocation)
@@ -146,18 +146,7 @@ export default function Rental({route,navigation}) {
           />
           <Text style={{marginLeft:SIZES.padding,...FONTS.h4}}>Location</Text>
         </View>
-        <View style={{flexDirection:"row"}}>
-          <Image 
-          source={icons.card}
-          resizeMode="contain"
-          style={{
-            width:20,
-            height:20,
-            tintColor: COLORS.darkgray
-          }}
-          />
-          <Text style={{ marginLeft:SIZES.padding,...FONTS.h4}}>8888</Text>
-        </View>
+        
 
       </View>
         {/* order Button*/}

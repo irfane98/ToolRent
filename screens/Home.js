@@ -2,6 +2,7 @@ import { View, Text,SafeAreaView,StyleSheet,TouchableOpacity,Image,FlatList } fr
 import React , {useState} from 'react'
 
 import {icons,images,SIZES,COLORS,FONTS} from '../constants'
+//import { useSelector } from 'react-redux'
 
 export default function Home({navigation}) {
 
@@ -80,7 +81,13 @@ const toolsData=[
 ]
 
 
+//const authUser=useSelector(state=>state.users)
+//console.log(authUser);
+/**
+ {"token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY5MGZiMWFlMDQ4YTU0OGZiNjgxYWQ2MDkyYjBiODY5ZWE0NjdhYzYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vdG9vbHJlbnQtMzUxODE3IiwiYXVkIjoidG9vbHJlbnQtMzUxODE3IiwiYXV0aF90aW1lIjoxNjU1OTIxMDU4LCJ1c2VyX2lkIjoiMEFBQWFnRVQxaWZ3ajVkV2N5TWNhTmJ5UzhKMiIsInN1YiI6IjBBQUFhZ0VUMWlmd2o1ZFdjeU1jYU5ieVM4SjIiLCJpYXQiOjE2NTU5MjEwNTgsImV4cCI6MTY1NTkyNDY1OCwiZW1haWwiOiJpcmZhbmVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImlyZmFuZUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.blaHuCvhfN2AZ1x0A8ff98DdZPuIJDJwMHkx3TynXLaT0vYV4yZp1qe7NFmXin5s-EM7gaTCPwdsQswVj3lZ8Ds9Mmc4lsok69uwkSVSP3r0w8oP1hKDu6rgqBgf-PcZPIiPd_bP84HsoV19_59leYA0zSJVdcAHX5tWm6XEGYkEr-VO4Ow7rc7TWFZ7ChI1qx1mrnkoexgauf7DUJFLpS_ChYcnDr6z4fPhIsTCeXZkbMe8c71AmYJ9LbH0bsqnweBvGaw-IbWR6LpdyNe6frRbhTDfnCERiSDa28BFKnxB4tjEpfO02zIf81F28U3BABer_eBBhqjgoFtjSaeBWA",
+  "userId": "0AAAagET1ifwj5dWcyMcaNbyS8J2"}
 
+ */
 
 const [categories, setCategories] = useState(categoryData)
 const [selectedCategory, setSelectedCategory] = useState(null)

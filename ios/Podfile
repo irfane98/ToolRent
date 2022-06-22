@@ -23,6 +23,8 @@ target 'Toolrent' do
 
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
+
   target 'ToolrentTests' do
     inherit! :complete
     # Pods for testing

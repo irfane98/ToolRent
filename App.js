@@ -5,6 +5,7 @@ import Tabs from './navigation/tabs'
 
 
 
+
 import { View, Text } from 'react-native'
 
 import { 
@@ -19,18 +20,22 @@ import {
   Otp,
   ForgotPassword
 } from './screens'
+import store from './redux/store'
+import { Provider } from 'react-redux'
+
 
 const Stack = createStackNavigator()
 
 export default function App() {
  
   return (
+  <Provider store={store}>
    <NavigationContainer>
      <Stack.Navigator
         screenOptions={{
           headerShown :false
         }}
-        initialRouteName={'Home'}
+        initialRouteName={'OnBoarding'}
      >
        <Stack.Screen name='onBoarding' component={onBoarding}/>
        <Stack.Screen name='SignIn' component={SignIn}/>
@@ -45,5 +50,6 @@ export default function App() {
 
      </Stack.Navigator>
    </NavigationContainer>
+   </Provider>
   )
 }

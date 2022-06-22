@@ -1,4 +1,4 @@
-import { View, Text,TouchableOpacity,Image } from 'react-native'
+import { View, Text,TouchableOpacity,Image,Alert } from 'react-native'
 import React from 'react'
 import {AuthLayout} from '../'
 
@@ -6,8 +6,15 @@ import { FONTS,COLORS,SIZES,icons } from '../../constants';
 
 import { FormInput,TextButton, TextIconButton } from '../../components';
 import { utils } from '../../utils';
+import { actionSignup } from '../../redux/actions/actionAuth'
+import { useDispatch } from 'react-redux'
+
+
 
 export default function SignUp({navigation}) {
+
+  const dispatch= useDispatch();
+
 const [email, setEmail] = React.useState("")
 const [username, setUsername] = React.useState("") 
 const [password, setPassword] = React.useState("")
@@ -15,11 +22,38 @@ const [showPass, setShowPass] = React.useState(false)
 const [emailError, setEmailError] = React.useState("")
 const [usernameError, setUsernameError] = React.useState("")
 const [passwordError, setPasswordError] = React.useState("")
+const [error, setError] = React.useState()
+
+
+React.useEffect(() => {
+  if (error != null) {
+    
+    Alert.alert(
+      'Erreur',
+      error,
+      [{text:'OK'}]
+    )
+  }
+}, [error])
 
 
 
-function isEnableSignUp(){
+
+ function isEnableSignUp(){
   return email!="" &&username!="" && password !="" && emailError =="" && passwordError =="" && usernameError==""
+}
+async function handleSubmit(){
+  if (email.length>0 && password.length>0) {
+    setError(null)
+   try {
+      await dispatch(actionSignup(email,password))
+      navigation.navigate('Home')
+   } catch (error) {
+    setError(error.message);
+    
+   }
+    
+  }
 }
 
  return (
@@ -134,7 +168,9 @@ function isEnableSignUp(){
          borderRadius:SIZES.radius,
          backgroundColor:isEnableSignUp()? COLORS.primary :COLORS.lightGray3
        }}
-       onPress={()=> navigation.navigate("Otp")}
+      // onPress={()=> navigation.navigate("Otp")}
+      onPress={handleSubmit}
+
        />
        <View  style={{
             flexDirection:'row',

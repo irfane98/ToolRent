@@ -1,4 +1,4 @@
-import { View, Text,TouchableOpacity,Image } from 'react-native'
+import { View, Text,TouchableOpacity,Image,Alert, AsyncStorage } from 'react-native'
 import React from 'react'
 import {AuthLayout} from '../'
 import { FONTS,SIZES,COLORS,icons} from '../../constants'
@@ -8,21 +8,85 @@ import { FormInput,
          TextIconButton
 } from '../../components'
 import {utils} from "../../utils";
+import { actionLogin } from '../../redux/actions/actionAuth'
+import { actionSignup } from '../../redux/actions/actionAuth'
+import { useDispatch } from 'react-redux'
+
+
+
 
 
 
 export default function SignIn({navigation}) {
+
+ 
+  const dispatch= useDispatch();
+
+
 
 const [email, setEmail] = React.useState("")
 const [password, setPassword] = React.useState("")
 const [emailError, setEmailError] = React.useState("")
 const [showPass, setShowPass] = React.useState(false)
 const [saveMe, setSaveMe] = React.useState(false)
+const [error, setError] = React.useState()
+
+async function load(){
+  const userDetailsStr=await AsyncStorage.getItem('usersDetails');
+  const userDetailsObj=JSON.parse(userDetailsStr);
+  const {token,userId,dateTokenExpire}= userDetailsObj;
+  const expireDate= new Date(dateTokenExpire)
+  if (expireDate<= new Date() ||!token || !userId) {
+    return;
+  }
+  navigation.navigate('Home')
+}
+
+React.useLayoutEffect(() => {
+  load();
+}, [])
+
+
+React.useEffect(() => {
+  if (error != null) {
+    
+    Alert.alert(
+      'Erreur',
+      error,
+      [{text:'OK'}]
+    )
+  }
+}, [error]
+)
 
 function isEnableSignIn(){
   return email !="" && password !="" && emailError==""
   
 }
+async function handleSubmit(){
+  if (email.length>0 && password.length>0) {
+    setError(null)
+   try {
+      await dispatch(actionLogin(email,password))
+      navigation.navigate('Home')
+   } catch (error) {
+    setError(error.message);
+    
+   }
+    
+  }else{
+    setError(null)
+   try {
+      await dispatch(actionLogin(email,password))
+      navigation.navigate('Home')
+   } catch (error) {
+    setError(error.message);
+    
+   }
+  }
+}
+
+
   return (
    <AuthLayout 
         title="Connectez vous!"
@@ -35,7 +99,7 @@ function isEnableSignIn(){
        {/* Form Input */}
        <FormInput 
             label="Email"
-            keyboardType='email-adress'
+            keyboardType='email-address'
             autoCompleteType='email'
             onChange={(value)=>{
               //validate email 
@@ -131,7 +195,8 @@ function isEnableSignIn(){
           
           
         }}
-        onPress={()=>navigation.navigate("Otp")}
+       // onPress={()=>navigation.navigate("Otp")}
+       onPress={handleSubmit}
 
         />
 
@@ -161,6 +226,23 @@ function isEnableSignIn(){
          />
 
        </View>
+      {/* se connecter en tant qu'invité */}
+      <TextButton 
+        label="Continuer en tant qu'invité"
+        disabled={false}
+        buttonContainerStyle={{
+          height:55,
+          alignItems:'center',
+          marginTop:24,
+          borderRadius: SIZES.radius,
+          backgroundColor:COLORS.primary 
+
+          
+          
+        }}
+        onPress={()=>navigation.navigate("Home")}
+
+        />
 
      </View>
      {/* footer */}
