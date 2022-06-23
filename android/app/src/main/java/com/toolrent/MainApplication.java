@@ -1,9 +1,11 @@
 package com.toolrent;
 
+
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -15,6 +17,13 @@ import com.facebook.soloader.SoLoader;
 import com.toolrent.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Arrays;
+import com.facebook.react.shell.MainReactPackage;
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
+import com.horcrux.svg.SvgPackage;
+
+
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -25,13 +34,16 @@ public class MainApplication extends Application implements ReactApplication {
           return BuildConfig.DEBUG;
         }
 
-        @Override
-        protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
-          return packages;
+        protected List<ReactPackage> getPackages(){
+            return Arrays.<ReactPackage>asList(
+                    new MainReactPackage(),
+            new RNGestureHandlerPackage(),
+                    new SafeAreaContextPackage(),
+                    new MapsPackage(),
+                    new SvgPackage()
+
+
+            );
         }
 
         @Override

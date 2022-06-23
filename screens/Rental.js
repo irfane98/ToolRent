@@ -4,10 +4,10 @@ import React,{useState,useEffect}  from 'react'
 import {icons,images,SIZES,COLORS,FONTS} from '../constants'
 
 export default function Rental({route,navigation}) {
-  const [tool, setTool] = useState(null);
-  const [currentLocation, setCurrentLocation] = useState(null);
+  const [tool, setTool] = React.useState(null);
+  const [currentLocation, setCurrentLocation] = React.useState(null);
 
-  React.useEffect(() => {
+React.useEffect(() => {
     let {item} = route.params
 
     setTool(item)
