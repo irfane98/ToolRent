@@ -26,6 +26,10 @@ export const share = require("../assets/icons/share.png")
 export const settings = require("../assets/icons/settings.png")
 export const editProfile = require("../assets/icons/editProfile.png")
 export const camera = require("../assets/icons/camera.png")
+export const pin2 = require("../assets/icons/pin2.png")
+export const tools = require("../assets/icons/tools.png")
+
+
 
 
 
@@ -58,5 +62,7 @@ export default {
     share,
     settings,
     editProfile,
-    camera
+    camera,
+    pin2,
+    tools
 }

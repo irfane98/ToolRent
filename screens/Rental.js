@@ -8,7 +8,7 @@ export default function Rental({route,navigation}) {
   const [currentLocation, setCurrentLocation] = React.useState(null);
 
 React.useEffect(() => {
-    let {item} = route.params
+    let {item,currentLocation} = route.params
 
     setTool(item)
     setCurrentLocation(currentLocation)

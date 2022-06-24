@@ -6,6 +6,16 @@ import {icons,images,SIZES,COLORS,FONTS} from '../constants'
 
 export default function Home({navigation}) {
 
+  // initialLocation
+  const initialCurrentLocation = {
+    streetName: "Webstart Street",
+    gps: {
+        latitude: 48.87055,
+        longitude: 2.3631643  
+    }
+}
+
+
   // data categories 
   const categoryData = [
     {
@@ -47,8 +57,8 @@ const toolsData=[
     photo: images.motobineuse,
     duration: "30 - 45 min",
     location: {
-        latitude: 1.5347282806345879,
-        longitude: 110.35632207358996},
+        latitude: 48.753554,
+        longitude: 2.2959423 },
     },
     {
       id: 2,
@@ -60,8 +70,8 @@ const toolsData=[
       photo: images.pince,
       duration: "30 - 45 min",
       location: {
-          latitude:  1.5238753474714375,
-          longitude: 110.34261833833622},
+          latitude:  48.795056,
+          longitude: 2.3027323},
       },
       {
         id: 3,
@@ -73,8 +83,8 @@ const toolsData=[
         photo: images.karcher,
         duration: "30 - 45 min",
         location: {
-            latitude: 1.5578068150528928,
-            longitude: 110.35482523764315
+            latitude: 48.8623357,
+            longitude: 2.4412184
           },
         },
        
@@ -92,7 +102,7 @@ const toolsData=[
 const [categories, setCategories] = useState(categoryData)
 const [selectedCategory, setSelectedCategory] = useState(null)
 const [tools, settools] = useState(toolsData)
-//const [currentLocation, setCurrentLocation] = useState(initialCurrentLocation)
+const [currentLocation, setCurrentLocation] = React.useState(initialCurrentLocation)
   function onSelectCategory(category){
     //filter les outils
     let toolsList= toolsData.filter(a => a.categories.includes(category.id))
@@ -109,7 +119,7 @@ const [tools, settools] = useState(toolsData)
     const renderItem =({item}) => (
       <TouchableOpacity style={{
         marginBottom:SIZES.padding *2 }}
-        onPress={()=>navigation.navigate("Rental", {item}
+        onPress={()=>navigation.navigate("Rental", {item,currentLocation}
         )}
       >
         {/*Image*/}
