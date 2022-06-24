@@ -235,10 +235,11 @@ async function handleSubmit(){
           alignItems:'center',
           marginTop:24,
           borderRadius: SIZES.radius,
-          backgroundColor:COLORS.primary 
-
-          
-          
+          backgroundColor:null
+        }}
+        labelStyle={{
+          color:COLORS.primary,
+          ...FONTS.h4
         }}
         onPress={()=>navigation.navigate("Home")}
 
@@ -258,7 +259,7 @@ async function handleSubmit(){
           icon={icons.facebook} 
           iconPosition="LEFT"
           iconStyle={{
-            tintColor:COLORS.white
+            tintColor:null
           }}
           label="Se connecter avec Facebook"
           labelStyle={{

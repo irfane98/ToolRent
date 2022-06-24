@@ -101,12 +101,13 @@ const toolsData=[
 
 const [categories, setCategories] = useState(categoryData)
 const [selectedCategory, setSelectedCategory] = useState(null)
-const [tools, settools] = useState(toolsData)
+const [tools, setTools] = useState(toolsData)
 const [currentLocation, setCurrentLocation] = React.useState(initialCurrentLocation)
   function onSelectCategory(category){
     //filter les outils
     let toolsList= toolsData.filter(a => a.categories.includes(category.id))
     setSelectedCategory(category)
+    setTools(toolsList)
   }
   function getCategoryNameById(id){
     let category= categories.filter(a => a.id == id)
@@ -220,6 +221,7 @@ return(
         }}
           onPress={()=> onSelectCategory(item)}
         >
+
           <View
           style={{
             width:50,
@@ -249,7 +251,7 @@ return(
             marginLeft:10
           }}>
             {/*
-              item.map.categories((categoryId)=>{
+              item.categories.map((categoryId)=>{
                 return(
                   <View
                   style={{flexDirection:'row'}}

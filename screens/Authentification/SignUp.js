@@ -205,7 +205,7 @@ async function handleSubmit(){
           icon={icons.facebook} 
           iconPosition="LEFT"
           iconStyle={{
-            tintColor:COLORS.white
+            tintColor:null
           }}
           label="Se connecter avec Facebook"
           labelStyle={{

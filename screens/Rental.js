@@ -8,10 +8,13 @@ export default function Rental({route,navigation}) {
   const [currentLocation, setCurrentLocation] = React.useState(null);
 
 React.useEffect(() => {
-    let {item,currentLocation} = route.params
-
-    setTool(item)
-    setCurrentLocation(currentLocation)
+    if(route?.params?.item){
+      setTool(route.params.item)
+    }
+    if(route?.params?.currentLocation){
+      let {currentLocation} = route.params
+      setCurrentLocation(currentLocation)
+    }
   
   })
   function renderHeader(){
