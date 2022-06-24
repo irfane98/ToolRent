@@ -9,6 +9,9 @@ import SignIn from "./Authentification/SignIn";
 import SignUp from "./Authentification/SignUp";
 import Otp from "./Authentification/Otp";
 import ForgotPassword from "./Authentification/ForgotPassword";
+import myCard from "./myCard";
+
+
 
 export{
     Home,
@@ -21,5 +24,6 @@ export{
     SignUp,
     Otp,
     ForgotPassword,
-    editUser
+    editUser,
+    myCard
 }

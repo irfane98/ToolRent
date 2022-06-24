@@ -1,11 +1,12 @@
 import { View, Text,Image,TouchableOpacity} from 'react-native'
-import React,{useEffect} from 'react'
+import React,{useEffect,useRef} from 'react'
 import MapView , {PROVIDER_GOOGLE,Marker} from 'react-native-maps'
 
 import {icons,images,SIZES,COLORS,FONTS,constants,GOOGLE_API_KEY} from '../constants'
 import MapViewDirections from 'react-native-maps-directions'
 
 export default function location({route,navigation}) {
+  const mapView = useRef()
 
   const [tool, setTool] = React.useState(null)
   const [streetName, setStreetName] = React.useState("")
@@ -38,6 +39,29 @@ useEffect(() => {
   }
 
   }, [])
+  function zoomIn() {
+    let newRegion = {
+        latitude: region.latitude,
+        longitude: region.longitude,
+        latitudeDelta: region.latitudeDelta / 2,
+        longitudeDelta: region.longitudeDelta / 2
+    }
+
+    setRegion(newRegion)
+    mapView.current.animateToRegion(newRegion, 200)
+}
+
+function zoomOut() {
+    let newRegion = {
+        latitude: region.latitude,
+        longitude: region.longitude,
+        latitudeDelta: region.latitudeDelta * 2,
+        longitudeDelta: region.longitudeDelta * 2
+    }
+
+    setRegion(newRegion)
+    mapView.current.animateToRegion(newRegion, 200)
+}
   
 
   function renderMap(){
@@ -97,6 +121,7 @@ useEffect(() => {
     return(
       <View style={{flex:1}}>
         <MapView 
+          ref={mapView}
           provider={PROVIDER_GOOGLE}
           initialRegion={region}
           style={{flex:1}}
@@ -106,7 +131,7 @@ useEffect(() => {
               destination={toLocation}
               apikey={GOOGLE_API_KEY}
               strokeWidth={5}
-              strokeColor={COLORS.primary}
+              strokeColor={COLORS.secondary}
               optimizeWaypoints={true}
           />
           {destinationMarker()}
@@ -162,78 +187,140 @@ useEffect(() => {
       </View>
     )
   }
-  function renderToolInfo(){
-    return(
-      <View style={{
-          position:'absolute',
-          bottom:50,
-          left:0,
-          right:0,
-          alignItems:'center',
-          justifyContent:'center',
-      }}>
-        <View style={{
-            width:SIZES.width *0.9,
-            paddingVertical:SIZES.padding*3,
-            paddingHorizontal:SIZES.padding*2,
-            borderRadius:SIZES.radius,
-            backgroundColor:COLORS.white
-        }}>
-          <View style={{flexDirection:'row', alignItems:'center'}}>
-           <Image
-              source={tool?.photo}
-              style={{
-                  width:50,
-                  height:50,
-                  borderRadius:75 
-              }}
-           />
-           <View style={{
-            flexDirection:'row',
-            marginTop:SIZES.padding *2,
-            justifyContent:'space-between',
-            marginLeft:15,
-        }}>
-          <TouchableOpacity style={{
-                height:50,
-                width:SIZES.width *0.5 - SIZES.padding*9,
-                backgroundColor:COLORS.primary,
-                alignItems:'center',
-                justifyContent:'center',
-                borderRadius:10
-          }}>
-            <Text style={{...FONTS.body3,color:COLORS.white}}>Payer</Text>
+  function renderToolInfo() {
+    return (
+        <View
+            style={{
+                position: 'absolute',
+                bottom: 50,
+                left: 0,
+                right: 0,
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}
+        >
+            <View
+                style={{
+                    width: SIZES.width * 0.9,
+                    paddingVertical: SIZES.padding * 3,
+                    paddingHorizontal: SIZES.padding * 2,
+                    borderRadius: SIZES.radius,
+                    backgroundColor: COLORS.white
+                }}
+            >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Image
+                        source={tool?.photo}
+                        style={{
+                            width: 50,
+                            height: 50,
+                            borderRadius: 25
+                        }}
+                    />
 
-          </TouchableOpacity>
-          <TouchableOpacity style={{
-                marginLeft:9,
-                height:50,
-                width:SIZES.width *0.5 - SIZES.padding*9,
-                backgroundColor:COLORS.primary,
-                alignItems:'center',
-                justifyContent:'center',
-                borderRadius:10
-          }}>
-            <Text style={{...FONTS.body3,color:COLORS.white}}>Message</Text>
+                    <View style={{ flex: 1, marginLeft: SIZES.padding }}>
+            
 
-          </TouchableOpacity>
+                        {/* Tool */}
+                        <Text style={{ color: COLORS.darkgray, ...FONTS.body4 }}>{tool?.name}</Text>
+                    </View>
+                </View>
 
+                {/* Buttons */}
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        marginTop: SIZES.padding * 2,
+                        justifyContent: 'space-between'
+                    }}
+                >
+                    <TouchableOpacity
+                        style={{
+                            flex: 1,
+                            height: 50,
+                            marginRight: 10,
+                            backgroundColor: COLORS.primary,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: 10
+                        }}
+                        onPress={() => navigation.navigate('myCard')}
+                    >
+                        <Text style={{ ...FONTS.h4, color: COLORS.white }}>Payer</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={{
+                            flex: 1,
+                            height: 50,
+                            backgroundColor: COLORS.secondary,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: 10
+                        }}
+                        onPress={() => {}}
+                    >
+                        <Text style={{ ...FONTS.h4, color: COLORS.white }}>Message</Text>
+                    </TouchableOpacity>
+                </View>
+
+            </View>
         </View>
-          </View>
-           <Text>{tool?.name}</Text>
-           
-        </View>
-        {/*Buttons*/}
-        
-
-      </View>
     )
-  }
+}
+
+  function renderButtons() {
+        return (
+            <View
+                style={{
+                    position: 'absolute',
+                    bottom: SIZES.height * 0.35,
+                    right: SIZES.padding * 2,
+                    width: 60,
+                    height: 130,
+                    justifyContent: 'space-between'
+                }}
+            >
+                {/* Zoom In */}
+                <TouchableOpacity
+                    style={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: 30,
+                        backgroundColor: COLORS.white,
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                    onPress={() => zoomIn()}
+                >
+                    <Text style={{ ...FONTS.body1 }}>+</Text>
+                </TouchableOpacity>
+
+                {/* Zoom Out */}
+                <TouchableOpacity
+                    style={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: 30,
+                        backgroundColor: COLORS.white,
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                    onPress={() => zoomOut()}
+                >
+                    <Text style={{ ...FONTS.body1 }}>-</Text>
+                </TouchableOpacity>
+            </View>
+
+        )
+    }
+
   return (
     <View style={{flex:1}}>
       {renderMap()}
       {renderDestinationHeader()}
       {renderToolInfo()}
+      {renderButtons()}
     </View>
   )
 }

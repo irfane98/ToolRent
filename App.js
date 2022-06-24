@@ -18,7 +18,8 @@ import {
   SignIn,
   SignUp,
   Otp,
-  ForgotPassword
+  ForgotPassword,
+  myCard
 } from './screens'
 import store from './redux/store'
 import { Provider } from 'react-redux'
@@ -45,6 +46,7 @@ export default function App() {
        <Stack.Screen name='Home' component={Tabs}/>
        <Stack.Screen name='Rental' component={Rental}/>
        <Stack.Screen name='Location' component={Location}/>
+       <Stack.Screen name='myCard' component={myCard}/>
        <Stack.Screen name='User' component={User}/>
        <Stack.Screen name='editUser' component={editUser}/>
 
