@@ -14,7 +14,8 @@ export default function FormInput({
     keyboardType='default',
     autoCompleteType="off",
     autoCapitalize="none",
-    errorMsg =""
+    errorMsg ="",
+    value=""
 
     }) {
   return (
@@ -34,7 +35,7 @@ export default function FormInput({
         paddingHorizontal:24,
         marginTop:SIZES.base,
         borderRadius:SIZES.radius,
-        backgroundColor:COLORS.lightGray2
+        backgroundColor:COLORS.lightGray3
 
     }}>
         {prependComponent}
@@ -44,6 +45,7 @@ export default function FormInput({
                 flex:1,
                 ...inputStyle
             }}
+            value={value}
             placeholder={placeholder}
             placeholderTextColor={COLORS.gray}
             secureTextEntry={secureTextEntry}

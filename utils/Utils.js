@@ -23,10 +23,11 @@ function validatePassword(value, setPasswordError) {
     }
 }
 
+
 const utils = {
     isValidEmail,
     validateEmail,
-    validatePassword
+    validatePassword,
 };
 
 export default utils;

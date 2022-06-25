@@ -1,5 +1,6 @@
 import CustomSwitch from "./CustomSwitch";
 import FormInput from "./FormInput";
+import FormInputCheck from "./FormInputCheck";
 import Header from "./Header";
 import IconButton from "./IconButton";
 import TextButton  from "./TextButton";
@@ -11,5 +12,6 @@ export{
     FormInput,
     CustomSwitch,
     Header,
-    IconButton
+    IconButton,
+    FormInputCheck
 }
