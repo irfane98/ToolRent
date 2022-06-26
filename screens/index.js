@@ -10,6 +10,7 @@ import SignUp from "./Authentification/SignUp";
 import Otp from "./Authentification/Otp";
 import ForgotPassword from "./Authentification/ForgotPassword";
 import myCard from "./myCard";
+import ProfilInfos from "./ProfilInfos";
 
 
 
@@ -25,5 +26,6 @@ export{
     Otp,
     ForgotPassword,
     editUser,
-    myCard
+    myCard,
+    ProfilInfos
 }

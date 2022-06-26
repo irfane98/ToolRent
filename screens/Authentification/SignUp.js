@@ -47,7 +47,7 @@ async function handleSubmit(){
     setError(null)
    try {
       await dispatch(actionSignup(email,password))
-      navigation.navigate('Home')
+      navigation.replace('ProfilInfos')
    } catch (error) {
     setError(error.message);
     

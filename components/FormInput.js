@@ -45,7 +45,6 @@ export default function FormInput({
                 flex:1,
                 ...inputStyle
             }}
-            value={value}
             placeholder={placeholder}
             placeholderTextColor={COLORS.gray}
             secureTextEntry={secureTextEntry}
