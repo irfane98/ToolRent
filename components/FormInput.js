@@ -18,6 +18,7 @@ export default function FormInput({
     value=""
 
     }) {
+
   return (
     <View  style={{...containerStyle}}> 
     {/*label & error msg */}
@@ -51,7 +52,7 @@ export default function FormInput({
             keyboardType={keyboardType}
             autoCompleteType={autoCompleteType}
             autoCapitalize={autoCapitalize}
-            onChangeText={(text)=>onChange(text)}
+            onChangeText={onChange}
         />
 
         {appendComponent}

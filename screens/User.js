@@ -1,5 +1,5 @@
-import { View,SafeAreaView,StyleSheet,Image,TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View,SafeAreaView,StyleSheet,Image,TouchableOpacity,Alert } from 'react-native'
+import React,{useEffect,useState} from 'react'
 import {
   Avatar,   
   Title,
@@ -9,18 +9,74 @@ import {
 } from 'react-native-paper';
 
 import {icons,images,SIZES,COLORS,FONTS} from '../constants'
-import { NavigationContainer } from '@react-navigation/native';
+//import AsyncStorage from '@react-native-async-storage/async-storage'
+import { AsyncStorage } from 'react-native';
 
 
 
 
-export default function User({navigation}) {
+
+export default function User({props,navigation}) {
+
+  const [lastName, setLastName] =useState("")
+  const [firstName, setFirstName] =useState("")    
+  const [profilImage, setProfilImage] =useState("https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?w=740&t=st=1656364125~exp=1656364725~hmac=f5f1e3162eb7c4c3fcc7e0538fba793876f919eccd60d7cc43f604c12fd77d06")
+  const [tel, setTel] =useState("")
+  const [isAuth, setIsAuth] = useState(false) 
+
+  async function load(){
+    try {
+    let jsonValue = await AsyncStorage.getItem('userProfilInfos')
+
+    if (jsonValue !== null) {
+      let user = JSON.parse(jsonValue);
+      /*
+      {
+      userId: userId,
+      firstName: firstName,
+      lastName: lastName,
+      tel: tel,
+      profilImage: profilImage
+
+      }
+      */
+     const userId = user.userId
+     fetchData(userId)
+    }
+    } catch (error) {
+      Alert.alert(
+        'Erreur',
+        'Nous avons un problème'
+        [{text:'OK',onPress:()=>props.navigation.navigate('SignIn')}]
+        )
+      
+    }
+
+  }
+  async function fetchData(userId){
+
+    const firebaseResp = await fetch(`https://toolrent-351817-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}.json`)
+    const fetchedData= await firebaseResp.json()
+
+    setLastName(fetchedData.lastName)
+    setFirstName(fetchedData.firstName)
+    setTel(fetchedData.tel)
+    setProfilImage(fetchedData.profilImage)
+    setIsAuth(true)
+  }
+
+  useEffect(() => {
+    load()
+  }, [])
+  
+
+
   return (
     <SafeAreaView sytyle={styles.userInfoSection}>
       <View style={styles.userInfoSection}>
         <View style={{flexDirection:'row',marginTop:15}}>
           <Avatar.Image
-              source={images.avatar}
+              source={{uri:profilImage}}
               size={80}
           />
           <View style={{marginLeft:20}}>
@@ -28,8 +84,8 @@ export default function User({navigation}) {
               marginTop:15,
               marginBottom: 5,
             }]
-            }>Irfane MAMAN</Title>
-            <Caption style={styles.caption}>@irfane_maman</Caption>
+            }>{firstName} {lastName}</Title>
+            <Caption style={styles.caption}>@{firstName}_{lastName}</Caption>
           </View>
           <TouchableOpacity 
           style={{
@@ -80,7 +136,7 @@ export default function User({navigation}) {
                   tintColor:COLORS.primary
                 }}
           />
-          <Text style={{...FONTS.body3,marginLeft:9}}> (+33 XXXXXXXXX)</Text>
+          <Text style={{...FONTS.body3,marginLeft:9}}> {tel}</Text>
 
         </View>
         <View style={styles.row}>
@@ -100,7 +156,7 @@ export default function User({navigation}) {
        <View style={styles.infoBoxWrapper}>
          <View style={styles.infoBox}>
 
-        <Title style={{...FONTS.h1}}> 12</Title>
+        <Title style={{...FONTS.h1}}> 0</Title>
         <Caption style={{ ...FONTS.body3}}>Locations effectués</Caption>
 
          </View>

@@ -5,8 +5,8 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactInstanceManager;
@@ -37,12 +37,11 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages(){
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-            new RNGestureHandlerPackage(),
+                    new AsyncStoragePackage(),
+                   new RNGestureHandlerPackage(),
                     new SafeAreaContextPackage(),
                     new MapsPackage(),
                     new SvgPackage()
-
-
             );
         }
 

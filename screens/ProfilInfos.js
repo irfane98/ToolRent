@@ -1,4 +1,4 @@
-import { StyleSheet, Text,TextInput,Alert, View,TouchableOpacity,ActivityIndicator,AsyncStorage,Image } from 'react-native'
+import { StyleSheet, Text,TextInput,Alert, View,TouchableOpacity,ActivityIndicator,Image } from 'react-native'
 import React,{useState} from 'react'
 import {icons,images,SIZES,COLORS,FONTS} from '../constants'
 import { FormInput,
@@ -7,110 +7,107 @@ import { FormInput,
     TextIconButton
 } from '../components'
 import {AuthLayout} from '../screens/'
+import { utils } from '../utils'
+import { AsyncStorage } from 'react-native';
+
+
+
+
 
 
 const ProfilInfos = ({navigation}) => {
-const [lastName, setLastName] =useState("")
-const [firstName, setFirstName] =useState("")
-const [email, setEmail] =useState("")
-const [emailError, setEmailError] = React.useState("")
-
-const [profilImage, setProfilImage] =useState("")
-const [tel, setTel] =useState("")
-const [isLoading, setIsLoading] = useState(false) 
-
-async function handleSubmit(){
-    if (lastName.length>0 && firstName.length>0 && email.length>0 && profilImage.length>0 && tel.length>0) {
-        setIsLoading(true)
-        // firebase DATABASE
-       const firebaseResp = await fetch('https://toolrent-351817-default-rtdb.europe-west1.firebasedatabase.app/',{
-            method:'POST',
-            headers : {
-                'Content-Type' : 'application/json'
-            },
-            body : JSON.stringify({
-                //ID via Firebase   
-                firstName:firstName,
-                lastName:lastName,
-                tel:tel,
-                email:email,
-                profilImage:profilImage
+    const [lastName, setLastName] =useState("")
+    const [firstName, setFirstName] =useState("")    
+    const [profilImage, setProfilImage] =useState("")
+    const [tel, setTel] =useState("")
+    const [isLoading, setIsLoading] = useState(false) 
+    
+    async function handleSubmit(){
+        
+        if (lastName.length >0 && firstName.length >0  && profilImage.length>0 && tel.length >0) {
+            setIsLoading(true)
+            // firebase DATABASE
+            const firebaseResp = await fetch('https://toolrent-351817-default-rtdb.europe-west1.firebasedatabase.app/users.json',{
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    //ID via Firebase   
+                    firstName: firstName,
+                    lastName: lastName,
+                    tel: tel,
+                    profilImage: profilImage
+                })
             })
-        })
-        if(!firebaseResp.ok){
-            throw new Error('Oups nous avons un problème !')
+            
+            if(!firebaseResp.ok){
+                throw new Error('Oups nous avons un problème !')
+            }
+            
+            const userData = await firebaseResp.json();
+            console.log(userData); //object name:ID 
+            //{"name": "-N5anS55H83NjMrYTYHg"}
+            
+            saveToAsyncStorage(userData.name,firstName,lastName,tel,profilImage)
+            
+            navigation.replace('Home')
+            
         }
-        const userDate = await firebaseResp.json()
-        console.log(userData); //object name:ID
-
-        navigation.replace('Home')
-
-    }else{
-        alert('veuillez remplir tous les champs !')
+        else{
+            alert('veuillez remplir tous les champs !')
+            console.log(userData)
+        }
     }
+    
+    async function saveToAsyncStorage(userId,firstName,lastName,tel,profilImage){
+        
+        await AsyncStorage.setItem('userProfilInfos',JSON.stringify({
+            userId: userId,
+            firstName: firstName,
+            lastName: lastName,
+            tel: tel,
+            profilImage: profilImage
+
+        }))
 }
 
   return (
     <AuthLayout 
         title=" Indiquez vos informations 📋!"
-   >
+   >   
      <View style={{
           flex:1,
           marginTop:24
      }}>
-       <FormInput 
-            label="Votre Nom"
+       <TextInput
+            placeholder='Votre Nom'
             style={styles.input}
-            onChangeText={text => setLastName}
+            onChangeText={text =>{
+                setLastName(text)}}
 
        />
-       <FormInput 
-            label="Votre Prénom"
+       <TextInput
+            placeholder='Votre Prénom'
             style={styles.input}
-            onChangeText={text => setFirstName}
+            onChangeText={text => setFirstName(text)}
 
        />
-       <FormInput 
-            label="Email"
-            keyboardType='email-address'
-            autoCompleteType='email'
-            onChange={(value)=>{
-              //validate email 
-              utils.validateEmail(value,setEmailError)
-              setEmail(value)
-            }}
-            errorMsg={emailError}
-            appendComponent={
-              <View style={{
-                  justifyContent:'center'
-              }}>
-                <Image 
-                source={email==""||(email !="" && emailError=="") ? icons.correct :icons.cancel}
-                style={{
-                  height:20,
-                  width:20,
-                  tintColor:email ==""?COLORS.gray :(email!="" && emailError =="")?"green":"red"
-                  
-                }}
-                
-                />
-
-
-              </View>
-            }
-        />
-       <FormInput 
-            label="Votre Tél"
+       
+       <TextInput
+            placeholder='Télephone'
             style={styles.input}
-            onChangeText={text => setTel}
+            onChangeText={text => setTel(text)}
+            keyboardType='number-pad'
 
        />
-       <FormInput 
-       label="Image"
+        
+      <TextInput
+        placeholder='Votre Image'
        style={styles.input}
-       onChangeText={text => setProfilImage}
+       onChangeText={text => setProfilImage(text)}
 
-  />
+        />
   {
     isLoading ? 
     <ActivityIndicator
@@ -148,7 +145,7 @@ const styles = StyleSheet.create({
         paddingHorizontal:50
     },
     input:{
-        backgroundColor:COLORS.white,
+        backgroundColor:COLORS.lightGray3,
         borderRadius:25,
         padding:9,
         textAlign:'center',
