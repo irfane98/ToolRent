@@ -84,8 +84,8 @@ export default function User({props,navigation}) {
               marginTop:15,
               marginBottom: 5,
             }]
-            }>{firstName} {lastName}</Title>
-            <Caption style={styles.caption}>@{firstName}_{lastName}</Caption>
+            }>{lastName} {firstName} </Title>
+            <Caption style={styles.caption}>@{lastName}_{firstName}</Caption>
           </View>
           <TouchableOpacity 
           style={{

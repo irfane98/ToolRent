@@ -2,7 +2,7 @@ import { View, Text,SafeAreaView,StyleSheet,TouchableOpacity,Image,FlatList } fr
 import React , {useState} from 'react'
 
 import {icons,images,SIZES,COLORS,FONTS} from '../constants'
-//import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 export default function Home({navigation}) {
 
@@ -98,6 +98,9 @@ const toolsData=[
   "userId": "0AAAagET1ifwj5dWcyMcaNbyS8J2"}
 
  */
+const userInfos= useSelector(state =>state.infos)
+
+console.log(userInfos);
 
 const [categories, setCategories] = useState(categoryData)
 const [selectedCategory, setSelectedCategory] = useState(null)

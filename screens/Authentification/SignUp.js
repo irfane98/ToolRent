@@ -40,7 +40,7 @@ React.useEffect(() => {
 
 
  function isEnableSignUp(){
-  return email!="" &&username!="" && password !="" && emailError =="" && passwordError =="" && usernameError==""
+  return email!=""  && password !="" && emailError =="" && passwordError =="" && usernameError==""
 }
 async function handleSubmit(){
   if (email.length>0 && password.length>0) {
@@ -72,7 +72,7 @@ async function handleSubmit(){
 
         <FormInput 
             label="Email"
-            keyboardType='email-adress'
+            keyboardType='email-address'
             autoCompleteType='email'
             onChange={(value)=>{
               //validate email 
@@ -98,33 +98,6 @@ async function handleSubmit(){
             }
 
        />
-       <FormInput 
-                  label="Nom d'utilisateur"
-                  containerStyle={{
-                    marginTop:SIZES.radius
-                  }}
-                  onChange={(value) =>{
-                    setUsername(value)
-                  }}
-                  errorMsg={usernameError}
-                  appendComponent={
-                      <View style={{
-                        justifyContent:'center'
-                      }}
-                      >
-                        <Image
-                            source={username =="" ||(username != "" && usernameError=="") ? icons.correct :icons.cancel}
-                            style={{
-                              height:20,
-                              width:20,
-                              tintColor: username==""? COLORS.gray :(username !="" && usernameError=="") ? "green": "red"
-                            }}
-                        />
-
-                      </View>
-                  }
-
-                />
                 <FormInput 
             label="Mot de passe"
             secureTextEntry={!showPass}

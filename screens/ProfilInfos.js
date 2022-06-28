@@ -1,4 +1,4 @@
-import { StyleSheet, Text,TextInput,Alert, View,TouchableOpacity,ActivityIndicator,Image } from 'react-native'
+import { StyleSheet, Text,TextInput,Alert, View,TouchableOpacity,ActivityIndicator,Image, ImagePickerIOS, Button } from 'react-native'
 import React,{useState} from 'react'
 import {icons,images,SIZES,COLORS,FONTS} from '../constants'
 import { FormInput,
@@ -8,7 +8,14 @@ import { FormInput,
 } from '../components'
 import {AuthLayout} from '../screens/'
 import { utils } from '../utils'
-import { AsyncStorage } from 'react-native';
+
+import { setUserInfos } from '../redux/actions/actionUserInfo'
+import { useDispatch } from 'react-redux'
+
+import * as ImagePicker from 'react-native-image-picker';
+
+
+
 
 
 
@@ -16,9 +23,12 @@ import { AsyncStorage } from 'react-native';
 
 
 const ProfilInfos = ({navigation}) => {
+
+    const dispatch = useDispatch();
+
     const [lastName, setLastName] =useState("")
     const [firstName, setFirstName] =useState("")    
-    const [profilImage, setProfilImage] =useState("")
+    const [profilImage, setProfilImage] =useState("https://img.freepik.com/vecteurs-libre/homme-affaires-caractere-avatar-isole_24877-60111.jpg?w=740&t=st=1656364125~exp=1656364725~hmac=f5f1e3162eb7c4c3fcc7e0538fba793876f919eccd60d7cc43f604c12fd77d06")
     const [tel, setTel] =useState("")
     const [isLoading, setIsLoading] = useState(false) 
     
@@ -26,31 +36,9 @@ const ProfilInfos = ({navigation}) => {
         
         if (lastName.length >0 && firstName.length >0  && profilImage.length>0 && tel.length >0) {
             setIsLoading(true)
-            // firebase DATABASE
-            const firebaseResp = await fetch('https://toolrent-351817-default-rtdb.europe-west1.firebasedatabase.app/users.json',{
-                method:'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    //ID via Firebase   
-                    firstName: firstName,
-                    lastName: lastName,
-                    tel: tel,
-                    profilImage: profilImage
-                })
-            })
             
-            if(!firebaseResp.ok){
-                throw new Error('Oups nous avons un problème !')
-            }
-            
-            const userData = await firebaseResp.json();
-            console.log(userData); //object name:ID 
-            //{"name": "-N5anS55H83NjMrYTYHg"}
-            
-            saveToAsyncStorage(userData.name,firstName,lastName,tel,profilImage)
-            
+           await dispatch(setUserInfos(lastName,firstName,tel,profilImage))
+              
             navigation.replace('Home')
             
         }
@@ -60,17 +48,28 @@ const ProfilInfos = ({navigation}) => {
         }
     }
     
-    async function saveToAsyncStorage(userId,firstName,lastName,tel,profilImage){
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibrary({
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 0.5,
+        });
+    
+        console.log(result);
+        /*
+        {"assets": [{"fileName": "rn_image_picker_lib_temp_1267caca-7db3-4175-8ae9-ff399af168a2.jpg",
+        "fileSize": 46591,
+        "height": 1280,
+        "type": "image/jpeg",
+         "uri": "file:///data/user/0/com.toolrent/cache/rn_image_picker_lib_temp_1267caca-7db3-4175-8ae9-ff399af168a2.jpg",
+         "width": 960}]}
+        */
+         if (!result.didCancel) {
+            setProfilImage(result.assets[0].uri)
+          }
         
-        await AsyncStorage.setItem('userProfilInfos',JSON.stringify({
-            userId: userId,
-            firstName: firstName,
-            lastName: lastName,
-            tel: tel,
-            profilImage: profilImage
-
-        }))
-}
+    }
+    
 
   return (
     <AuthLayout 
@@ -102,12 +101,18 @@ const ProfilInfos = ({navigation}) => {
 
        />
         
-      <TextInput
-        placeholder='Votre Image'
-       style={styles.input}
-       onChangeText={text => setProfilImage(text)}
+     {/*photo picker */}
+     <View style={styles.photoContainer}>
+        <View style={styles.wrapper}>
+            <Image
+                style={styles.photo}
+                source={{uri: profilImage}}
+            
+            />
+        </View>
+        <Button title='Sélectionner une photo' color='#f7ad05' onPress={pickImage}/>
 
-        />
+     </View>
   {
     isLoading ? 
     <ActivityIndicator
@@ -169,7 +174,23 @@ const styles = StyleSheet.create({
         fontSize:17,
         textAlign:'center',
         textTransform:'uppercase'
+    },
+    photoContainer:{
+        alignItems:'center'
+    },
+    wrapper:{
+        width:'50%',
+        height : 150,
+        justifyContent:'center',
+        alignItems:'center',
+        marginBottom: 9 , 
+        borderColor:COLORS.secondary,
+        borderWidth:1
+    },
+    photo:{
+        width:'100%',
+        height:'100%'
     }
 })
 
-export default ProfilInfos
+export default ProfilInfos;
