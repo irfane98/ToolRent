@@ -15,6 +15,8 @@ export const banner2= require("../assets/images/banner2.png")
 export const banner3= require("../assets/images/banner3.png")
 export const avatar= require("../assets/images/avatar.webp")
 export const card= require("../assets/images/card.png")
+export const peinture1= require("../assets/images/pistolet_peinture.jpg")
+export const peinture2= require("../assets/images/peinture.jpg")
 
 export default {
 
@@ -34,6 +36,8 @@ export default {
     banner2,
     banner3,
     avatar,
-    card
+    card,
+    peinture1,
+    peinture2,
 
 }

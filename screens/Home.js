@@ -52,7 +52,7 @@ const toolsData=[
     name: "Motobineuse",
     description: "Motobineuse en perfect etat pour un travail qui demande bcp d'effort physique ",
     price:"30 €/jour",
-    categories: [1,3],
+    categories: [4,4],
     photo: images.motobineuse,
     location: {
         latitude: 48.753554,
@@ -81,6 +81,56 @@ const toolsData=[
             longitude: 2.4412184
           },
         },
+        {
+          id: 4,
+          name: "Wagner 2361555",
+          description:"Pistolet à peinture murale laque et lasure ",
+          price:"12€/jour",
+          categories: [1,5],
+          photo: images.peinture1,
+          location: {
+              latitude: 48.847611,
+              longitude: 2.3955668
+            },
+          },
+          {
+            id: 5,
+            name: "Wagner airless ",
+            description:"Pistolet peinture Control Pro 350 R pour peintures murales, laques et lasures, et vernis d’intérieur, 15 m² en 2 min, réglage de pression ",
+            price:"15€/jour",
+            categories: [1,5],
+            photo: images.peinture1,
+            location: {
+                latitude: 48.852613,
+                longitude: 2.4061204
+              },
+            },
+            {
+              id: 6,
+              name: "Tarriere",
+              description:"Pourcreuser plus profond qu'avec une simple bêche et donc moins vous fatiguer et moins vous faire au mal au dos. ",
+              price:"11€/jour",
+              categories: [3,2],
+              photo: images.tarriere,
+              location: {
+                  latitude: 48.8753834,
+                  longitude: 2.3968854
+
+                },
+              },
+              {
+                id: 7,
+                name: "Nettoyeur à Pression",
+                description:"Nettoyeur à haute pression pour tous usage",
+                price:"9€/jour",
+                categories: [5,5],
+                photo: images.nettoyeur,
+                location: {
+                    latitude: 48.864967,
+                    longitude: 2.3583426
+  
+                  },
+                },
        
 ]
 
